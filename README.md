@@ -1,12 +1,20 @@
 # 리액트 연습
 
-## 도커 빌드
+## 개발환경 구동(docker-compose)
+
+* `docker-compose pu --build`
+* <http://localhost:3000/>
+* 원하면, `-d` 옵션으로 백그라운드 실행할 수 있음
+
+## 도커환경 구성
+
+### 도커 빌드
 
 * `docker build -t kkndo2/react .`
   * `-t` : tag명
   * `.` : 현재 디렉토리에 `Dockerfile`이 있음
 
-## 도커 컨테이너 실행
+### 도커 컨테이너 실행
 
 * `docker run -dt --name practice kkndo2/react`
   * `-d` : 백그라운드 실행
@@ -14,7 +22,7 @@
   * `-t` : TTY 모드를 사용.
   * `--name` : 컨테이너 이름 지정
 
-## 도커 컨테이너 실행 - 공유디렉토리 및 포트포워딩 설정
+### 도커 컨테이너 실행 - 공유디렉토리 및 포트포워딩 설정
 
 * `docker run -dt --name practice -v ${PWD}:/app -v /app/node_modules -p 3000:3000 kkndo2/react npm start`
   * `-v ${PWD}:/app` :
@@ -25,17 +33,11 @@
   * `-p 3000:3000` : 호스트 3000 => 컨테이너 3000 으로 포트포워딩
   * `npm start` : 컨테이너 실행 후 실행될 명령
 
-## 컨테이너 실행 후 tty접속
+### 컨테이너 실행 후 tty접속
 
 * `docker exec -it practice /bin/bash`
 
-## 도커 컴포즈 시작
-
-* `docker-compose pu --build`
-* <http://localhost:3000/>
-* 원하면, `-d` 옵션으로 백그라운드 실행할 수 있음
-
-## 리액트 웹서비스 시작
+### create-react-app 웹서비스 시작방법
 
 * `npm start`
 * <http://localhost:3000/>
