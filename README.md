@@ -1,68 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 리액트 연습
 
-## Available Scripts
+## 도커 빌드
 
-In the project directory, you can run:
+* `docker build -t kkndo2/react .`
+  * `-t` : tag명
+  * `.` : 현재 디렉토리에 `Dockerfile`이 있음
 
-### `npm start`
+## 도커 컨테이너 실행
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* `docker run -dt --name practice kkndo2/react`
+  * `-d` : 백그라운드 실행
+  * `-i` : 표준 입력이 활성화됨. 컨테이너에 명령을 입력할 수 있음.
+  * `-t` : TTY 모드를 사용.
+  * `--name` : 컨테이너 이름 지정
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## 도커 컨테이너 실행 - 공유디렉토리 및 포트포워딩 설정
 
-### `npm test`
+* `docker run -dt --name practice -v ${PWD}:/app -v /app/node_modules -p 3000:3000 kkndo2/react npm start`
+  * `-v ${PWD}:/app` :
+    * `${PWD}` : 호스트의 현재디렉토리
+    * `/app` : 컨테이너 내부 디렉토리
+  * `-v /app/node_modules` : node_modules 디렉토리를 호스트와 공유하지못하도록 볼륨마운트 설정. 
+    * 이렇게하면, docker에 이름없는 볼륨이 생성되고, 해당 `이름없는 볼륨`이 `/app/node_modules` 와 마운트되면서, 호스트의 node_modules 디렉토리와 공유되지 않는다.
+  * `-p 3000:3000` : 호스트 3000 => 컨테이너 3000 으로 포트포워딩
+  * `npm start` : 컨테이너 실행 후 실행될 명령
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 컨테이너 실행 후 tty접속
 
-### `npm run build`
+* `docker exec -it practice /bin/bash`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 도커 컴포즈 시작
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* `docker-compose pu --build`
+* <http://localhost:3000/>
+* 원하면, `-d` 옵션으로 백그라운드 실행할 수 있음
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 리액트 웹서비스 시작
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* `npm start`
+* <http://localhost:3000/>

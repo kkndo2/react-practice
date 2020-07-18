@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+    app:
+        image: kkndo2/react
+        container_name: practice
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - '.:/app'
+            - '/app/node_modules'
+        ports:
+            - '3000:3000'
+        environment:
+            - NODE_ENV=development
+        command: npm start
+        stdin_open: true
+        tty: true
