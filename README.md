@@ -2,7 +2,8 @@
 
 ## 개발환경 구동(docker-compose)
 
-* `docker-compose pu --build`
+* `docker-compose up --build`
+  * `--build` : Dockerfile에 변경사항이 있는경우, 빌드를 다시해준다고 함.
 * <http://localhost:3000/>
 * 원하면, `-d` 옵션으로 백그라운드 실행할 수 있음
 
@@ -41,3 +42,8 @@
 
 * `npm start`
 * <http://localhost:3000/>
+
+
+## 튜토리얼
+
+* <https://ko.reactjs.org/>
